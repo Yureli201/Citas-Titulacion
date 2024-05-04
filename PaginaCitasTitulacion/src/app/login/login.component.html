@@ -1,0 +1,27 @@
+
+<div class="container-fluid">
+    <form id="login" class="col-md-6 col-lg-4">
+      <div class="row text-center">
+        <h2>INGRESA TU</h2>
+        <h4>Matrícula</h4>
+        <input type="text" class="form-control text-center" name="matricula" [(ngModel)]="matricula" required>
+
+        <div class="alert alert-danger p-1" role="alert" *ngIf="mostrarBannerUno">
+          Favor de ingresar una matrícula
+        </div>
+
+        <div class="alert alert-danger p-1" role="alert" *ngIf="mostrarBannerDos">
+          Matrícula no encontrada
+        </div>
+
+        <div class="alert alert-danger p-1" role="alert" *ngIf="mostrarBannerTres">
+          Ingresa una matrícula correcta
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-success" (click)="cambioPagina()">Entrar</button>
+        </div>
+
+      </div>
+    </form>
+  </div>

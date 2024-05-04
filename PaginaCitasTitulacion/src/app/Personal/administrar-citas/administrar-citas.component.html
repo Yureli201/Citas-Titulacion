@@ -1,0 +1,135 @@
+<div class="navbar mt-4 p-0 d-flex justify-content-around">
+    <p id="crear" routerLink="/administrar-usuarios"><strong>ADMINISTRAR USUARIOS</strong> </p>
+    <p id="crear2"><strong>ADMINISTRAR CITAS</strong></p>
+    <p id="crear" routerLink="/fechas"><strong>ADMINISTRAR FECHAS</strong> </p>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="contenido">
+
+      <h3>CITAS PENDIENTES</h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th class="col-1">ID</th>
+              <th class="col-2">Fecha</th>
+              <th class="col-2">Hora</th>
+              <th class="col-3">Matrícula</th>
+              <th class="col-1 text-center">Modificar</th>
+              <th class="col-1 text-center">Eliminar</th>
+
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let cita of citas">
+              <ng-container *ngIf="cita.estado">
+                <td>{{ cita.id }}</td>
+                <td>{{ cita.fecha }}</td>
+                <td>{{ cita.hora }}</td>
+                <td>{{ cita.egresadoMatricula }}</td>
+                <td class="text-center">
+                  <fa-icon [icon]="actualizar" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="mostrar(cita)"></fa-icon>
+                </td>
+                <td class="text-center">
+                  <fa-icon [icon]="borrar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" (click)="idEliminar=cita.id"></fa-icon>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>CITAS COMPLETADAS/CANCELADAS</h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th class="col-1">ID</th>
+              <th class="col-2">Fecha</th>
+              <th class="col-2">Hora</th>
+              <th class="col-3">Matrícula</th>
+              <th class="col-1 text-center">Modificar</th>
+              <th class="col-1 text-center">Eliminar</th>
+
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let cita of citas">
+              <ng-container *ngIf="!cita.estado">
+              <td>{{ cita.id }}</td>
+              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.hora }}</td>
+              <td>{{ cita.egresadoMatricula }}</td>
+              <td class="text-center">
+                <fa-icon [icon]="actualizar" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="mostrar(cita)"></fa-icon>
+              </td>
+              <td class="text-center">
+                <fa-icon [icon]="borrar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" (click)="idEliminar=cita.id"></fa-icon>
+              </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">MODIFICAR CITA</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row row-cols-1 row-cols-md-1 mt-2">
+                <div class="col">
+                    FECHA
+                    <app-calendario  (fechaSeleccionadaEvent)="manejarFechaSeleccionada($event)"></app-calendario>
+                </div>
+                <div class="col">
+                    HORA
+                    <select class="form-select" name="hora" [(ngModel)]="CitaAc.hora" required>
+                      <option *ngFor="let horario of horariosDisponibles" [value]="horario">
+                        {{ horario }}
+                      </option>
+                    </select>
+                </div>
+                <div class="col">
+                  ESTADO
+                  <select class="form-select" name="hora" [(ngModel)]="CitaAc.estado" required>
+                      <option value=true>Pendiente</option>
+                      <option value=false>Completada</option>
+                  </select>
+              </div>
+            </div>
+            
+        </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-success" [disabled]="!fechaSeleccionada || !CitaAc.hora || !CitaAc.estado" data-bs-dismiss="modal" aria-label="Close" (click)="modificar(CitaAc)">ACTUALIZAR CITA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">ELIMINAR CITA</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>¿Esta seguro de eliminar la cita?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center ">
+            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" (click)="eliminar(idEliminar)">ELIMINAR CITA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

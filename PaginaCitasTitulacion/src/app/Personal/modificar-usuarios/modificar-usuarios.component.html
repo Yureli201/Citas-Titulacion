@@ -1,0 +1,70 @@
+<div class="navbar mt-3 p-0 d-flex justify-content-end">
+    <h5 id="crear">CREAR USUARIO</h5>
+</div>
+
+<div class="container-fluid">
+    <div id="form-crear">
+        <div class="row">
+            <form>
+                <div class="row row-cols-1 row-cols-md-2 mt-2">
+                    <div class="col">
+                        MATRÍCULA
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col">
+                        NOMBRE
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    NIVEL A TITULARSE
+                    <select class="form-select" [(ngModel)]="nivel" name="nivel" (change)="mostrarCarreras()">
+                        <option value="Técnico Superior Universitario">Técnico Superior Universitario</option>
+                        <option value="Licenciatura/Ingeniería">Licenciatura/Ingeniería</option>
+                    </select>
+                    
+                    </div>
+                    <div class="col">
+                    CARRERA A TITULARSE
+                        <select class="form-select" *ngIf="nivel=='Licenciatura/Ingeniería'">
+                            <option selected></option>
+                            <option  *ngFor="let carreras of carrerasLIC">{{carreras}}</option>
+                        </select>
+                        <select class="form-select" *ngIf="nivel=='Técnico Superior Universitario'">
+                            <option selected></option>
+                            <option  *ngFor="let carreras of carrerasTSU">{{carreras}}</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                    GENERACIÓN
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    CORREO ELECTRÓNICO
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="col">
+                    NÚMERO DE TELÉFONO
+                        <input type="tel" class="form-control">
+                    </div>
+                    <div class="col">
+                    CURP
+                        <input type="text" class="form-control">
+                    </div>
+                </div> 
+
+                DIRECCIÓN CON CP
+                <textarea type="text" class="form-control"></textarea>
+
+                <div class="col-12 mt-4 mb-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">CREAR USUARIO</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

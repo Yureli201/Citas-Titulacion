@@ -1,0 +1,47 @@
+<div class="navbar d-flex justify-content-around">
+    <img src="../assets/Imagenes/LOGO UTXJ 2020 png.png" alt="">
+    <h2>CITAS PARA TITULACIÓN</h2>
+    <fa-icon [icon]="salir" *ngIf="sesion" routerLink="/login"></fa-icon>
+</div>
+<div class="contenido">
+    <router-outlet></router-outlet>
+</div>
+
+
+
+
+
+
+<!--
+<table>
+  <thead>
+    <tr>
+      <th (click)="setSortBy('id')">ID</th>
+      <th (click)="setSortBy('name')">Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of sortItems()">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+    </tr>
+  </tbody>
+</table>-->
+
+
+<!--<input type="text" [(ngModel)]="searchText" placeholder="Buscar...">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of filterItems()">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+    </tr>
+  </tbody>
+</table>-->
+

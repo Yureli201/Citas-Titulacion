@@ -1,0 +1,38 @@
+<div class="navbar mt-4 p-0 d-flex justify-content-around">
+  <p id="crear" routerLink="/administrar-usuarios"><strong>ADMINISTRAR USUARIOS</strong> </p>
+  <p id="crear" routerLink="/administrar-citas"><strong>ADMINISTRAR CITAS</strong> </p>
+  <p id="crear2"><strong>ADMINISTRAR FECHAS</strong></p>
+</div>
+
+<div class="container-fluid">
+  <div class="contenido">
+    <div class="calendario">
+      <div class="navegacion">
+        <button (click)="cambiarAnio(-1)" class="btn btn-primary"><strong><</strong></button>
+        <h2><strong> Calendario {{anioActual}} </strong></h2>
+        <button (click)="cambiarAnio(1)" class="btn btn-primary"><strong>></strong></button>
+      </div>
+      <div class="row meses-container p-0">
+        <div class="col-md-4 col-sm-1 col-12 mt-4 mb-4" *ngFor="let mes of meses; let i = index">
+          <div class="mes">
+            <h3 class="text-center">{{mes}}</h3>
+            <div class="dias">
+              <div *ngFor="let semana of dias[i]">
+                <div *ngIf="semana.dia === 0" class="vacio"></div>
+                <div *ngIf="semana.dia > 0"
+                    [class.seleccionada]="esFechaSeleccionada(anioActual, i + 1, semana.dia)"
+                    (click)="seleccionarFecha(semana.dia, mes)">
+                  {{semana.dia}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex justify-content-evenly mt-3">
+        <button class="btn btn-dark" (click)="agregarFechas(this.fechasSeleccionadas)">Actualizar calendario</button>
+        <button class="btn btn-dark" (click)="eliminarTodos()">Eliminar guardados</button>
+      </div>
+    </div>
+  </div>
+</div>

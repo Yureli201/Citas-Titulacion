@@ -1,0 +1,40 @@
+#crear{
+    background-color: #727376;
+    color: white;
+    margin: 0 10%;
+    padding: 10px;
+    border-radius: 10px 10px 0% 0%;
+    }
+    
+    #navbar{
+      max-width: 5vh;
+    }
+    
+    .container-fluid {
+        min-height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+    #form-crear{
+      background-color:#727376;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+      margin-bottom: 5vh;
+      width: 100%;
+      border-radius: 20px;
+      padding: 3vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .row{
+      background-color: white;
+      width: 100%;
+      height: auto;
+    }
+    form{
+    width: 100%;
+    padding: 15px;
+    }

@@ -1,0 +1,331 @@
+<div class="navbar mt-3 p-0 d-flex justify-content-around">
+  <p id="crear2"><strong>ADMINISTRAR USUARIOS</strong> </p>
+  <p id="crear" routerLink="/administrar-citas"><strong>ADMINISTRAR CITAS</strong></p>
+  <p id="crear" routerLink="/fechas"><strong>ADMINISTRAR FECHAS</strong> </p>
+</div>
+
+<div class="container-fluid">
+  <div class="contenido">
+    <div id="filtro">
+      <div class="col">
+        <h3>EGRESADOS</h3>
+        <input type="text" class="mb-2" placeholder="Buscar" [(ngModel)]="terminoBusqueda">
+      </div>
+      
+
+      <fa-icon  [icon]="agregar" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#crearEgresado" >
+      </fa-icon>
+      <fa-icon  [icon]="actualizar" class="btn btn-dark m-2" (click)="buscarEgresados()" >
+      </fa-icon>
+      <fa-icon [icon]="botonUno" class="btn btn-dark m-2" (click)="vistaEgresados()">
+      </fa-icon>
+
+    </div>
+    <div class="table-responsive">
+    <table *ngIf="visibleEgresados" class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th class="col-1" (click)="ordenarPorColumnaE('matricula')">MATRÍCULA</th>
+          <th class="col-3" (click)="ordenarPorColumnaE('nombre')">NOMBRE</th>
+          <th class="col-1" (click)="ordenarPorColumnaE('generacion')">GENERACIÓN</th>
+          <th class="col-1" (click)="ordenarPorColumnaE('nivelTitulacion')">NIVEL</th>
+          <th class="col-4" (click)="ordenarPorColumnaE('carreraTitulacion')">CARRERA</th>
+          <th class="col-1 text-center">MODIFICAR</th>
+          <th class="col-1 text-center">ELIMINAR</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let egresado of filtrarEgresados()">
+          <td>{{ egresado.matricula }}</td>
+          <td>{{ egresado.nombre }}</td>
+          <td>{{ egresado.generacion }}</td>
+          <td>{{ egresado.nivelTitulacion }}</td>
+          <td>{{ egresado.carreraTitulacion }}</td>
+          <td class="text-center">
+            <fa-icon class="btn btn-primary" [icon]="editar" data-bs-toggle="modal" data-bs-target="#mostrarEgresado"(click)="egresadoM=egresado">
+              uno
+            </fa-icon>
+          </td>
+          <td class="text-center">
+            <fa-icon class="btn btn-danger" [icon]="eliminar" data-bs-toggle="modal" data-bs-target="#eliminarEgresado" (click)="egresadoM.matricula=egresado.matricula"><!--(click)="idEliminar=cita.id"-->
+              uno
+            </fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    
+
+    <div id="filtro">
+      <div class="col mt-3">
+        <h3>ADMINISTRADORES</h3>
+        <input type="text" placeholder="Buscar" [(ngModel)]="terminoBusquedaP">
+      </div>
+
+      <fa-icon [icon]="agregar" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#crearPersonal" ></fa-icon>
+      <fa-icon  [icon]="actualizar" class="btn btn-dark m-2" (click)="buscarPersonal()" ></fa-icon>
+      <fa-icon [icon]="botonDos" class="btn btn-dark m-2" (click)="vistaAdmin()"></fa-icon>
+    </div>
+    <div class="table-responsive">
+      <table *ngIf="visibleAdmin" class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th class="col-1" (click)="ordenarPorColumnaP('numeroTrabajador')">No.TRABAJADOR</th>
+            <th class="col-5" (click)="ordenarPorColumnaP('nombre')">NOMBRE</th>
+            <th class="col-1 text-center">MODIFICAR</th>
+            <th class="col-1 text-center">ELIMINAR</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let admin of filtrarEgresadosP()">
+            <td>{{ admin.numeroTrabajador }}</td>
+            <td>{{ admin.nombre }}</td>
+            <td class="text-center">
+              <fa-icon class="btn btn-primary" [icon]="editar" data-bs-toggle="modal" data-bs-target="#mostrarPersonal" (click)="personalM=admin">
+                uno
+              </fa-icon>
+            </td>
+            <td class="text-center">
+              <fa-icon class="btn btn-danger" [icon]="eliminar" data-bs-toggle="modal" data-bs-target="#eliminarPersonal" (click)="personalM.numeroTrabajador=admin.numeroTrabajador">
+                uno
+              </fa-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+      <!--MODAL CREAR EGRESADO-->
+      <div class="modal fade" id="crearEgresado" tabindex="-1" aria-labelledby="crearEgresado" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">CREAR EGRESADO</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row row-cols-1 row-cols-md-2 mt-2">
+                    <div class="col">
+                        MATRÍCULA
+                        
+                        <input type="number" class="form-control" name="matricula" [(ngModel)]="egresadoM.matricula">
+                    </div>
+                    <div class="col">
+                        NOMBRE
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="egresadoM.nombre" >
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    NIVEL A TITULARSE
+                    <select class="form-select" [(ngModel)]="egresadoM.nivelTitulacion" name="nivel">
+                        <option value="TSU">Técnico Superior Universitario</option>
+                        <option value="Lic/Ing">Licenciatura/Ingeniería</option>
+                    </select>
+                    
+                    </div>
+                    <div class="col">
+                    CARRERA A TITULARSE
+                        <select class="form-select" name="carrera" *ngIf="nivel=='Lic/Ing'" [(ngModel)]="egresadoM.carreraTitulacion">
+                            <option selected></option>
+                            <option  *ngFor="let carreras of carrerasLIC">{{carreras}}</option>
+                        </select>
+                        <select class="form-select" name="carrera" *ngIf="nivel=='TSU'" [(ngModel)]="egresadoM.carreraTitulacion">
+                            <option selected></option>
+                            <option  *ngFor="let carreras of carrerasTSU">{{carreras}}</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                    GENERACIÓN
+                        <input type="text" class="form-control" name="generacion" [(ngModel)]="egresadoM.generacion" >
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    CORREO ELECTRÓNICO
+                        <input type="email"  class="form-control" name="correo" [(ngModel)]="egresadoM.correo">
+                    </div>
+                    <div class="col">
+                    NÚMERO DE TELÉFONO
+                        <input type="tel" class="form-control" name="telefono" [(ngModel)]="egresadoM.telefono">
+                    </div>
+                    <div class="col">
+                    CURP
+                        <input type="text" class="form-control" name="curp" [(ngModel)]="egresadoM.curp">
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="crearEgresado(egresadoM)">GUARDAR CAMBIOS</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL EDITAR EGRESADO-->
+      <div class="modal fade" id="mostrarEgresado" tabindex="-1" aria-labelledby="mostrarEgresado" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">EDITAR EGRESADO</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row row-cols-1 row-cols-md-2 mt-2">
+                    <div class="col">
+                        MATRÍCULA
+                        <input type="number" class="form-control" name="matricula" [(ngModel)]="egresadoM.matricula" disabled >
+                    </div>
+                    <div class="col">
+                        NOMBRE
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="egresadoM.nombre" >
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    NIVEL A TITULARSE
+                    <select class="form-select" [(ngModel)]="egresadoM.nivelTitulacion" name="nivel">
+                        <option value="TSU">Técnico Superior Universitario</option>
+                        <option value="Lic/Ing">Licenciatura/Ingeniería</option>
+                    </select>
+                    
+                    </div>
+                    <div class="col">
+                    CARRERA A TITULARSE
+                        <select class="form-select" name="carrera" *ngIf="nivel=='Lic/Ing'" [(ngModel)]="egresadoM.carreraTitulacion">
+                            <option selected></option>
+                            <option  *ngFor="let carreras of carrerasLIC">{{carreras}}</option>
+                        </select>
+                        <select class="form-select" name="carrera" *ngIf="nivel=='TSU'" [(ngModel)]="egresadoM.carreraTitulacion">
+                            <option selected></option>
+                            <option  *ngFor="let carreras of carrerasTSU">{{carreras}}</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                    GENERACIÓN
+                        <input type="text" class="form-control" name="generacion" [(ngModel)]="egresadoM.generacion" >
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    CORREO ELECTRÓNICO
+                        <input type="email"  class="form-control" name="correo" [(ngModel)]="egresadoM.correo">
+                    </div>
+                    <div class="col">
+                    NÚMERO DE TELÉFONO
+                        <input type="tel" class="form-control" name="telefono" [(ngModel)]="egresadoM.telefono">
+                    </div>
+                    <div class="col">
+                    CURP
+                        <input type="text" class="form-control" name="curp" [(ngModel)]="egresadoM.curp">
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarEgresado(egresadoM.matricula, egresadoM)">GUARDAR CAMBIOS</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL ELIMINAR EGRESADO-->
+      <div class="modal fade" id="eliminarEgresado" tabindex="-1" aria-labelledby="eliminarEgresado" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">ELIMINAR EGRESADO</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar al egresado?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center ">
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" (click)="eliminarEgresado(egresadoM.matricula)">ELIMINAR EGRESADO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL ELIMINAR PERSONAL-->
+      <div class="modal fade" id="eliminarPersonal" tabindex="-1" aria-labelledby="eliminarPersonal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">ELIMINAR ADMINISTRADOR</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar al egresado?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center ">
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" (click)="eliminarPersonal(personalM.numeroTrabajador)">ELIMINAR ADMINISTRADOR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="crearPersonal" tabindex="-1" aria-labelledby="crearPersonal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">CREAR ADMINISTRADOR</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form>
+                    <div class="col">
+                        NÚMERO DE TRABAJADOR
+                        <input type="text" class="form-control" name="numeroTrabajador" [(ngModel)]="personalM.numeroTrabajador">
+                    </div>
+                    <div class="col">
+                        NOMBRE
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="personalM.nombre">
+                    </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="crearPersonal(personalM)">GUARDAR CAMBIOS</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL EDITAR PERSONAL-->
+      <div class="modal fade" id="mostrarPersonal" tabindex="-1" aria-labelledby="mostrarPersonal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">EDITAR ADMINISTRADOR</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="col">
+                    NÚMERO DE TRABAJADOR
+                    <input type="text" class="form-control" name="numeroTrabajador" [(ngModel)]="personalM.numeroTrabajador" disabled>
+                </div>
+                <div class="col">
+                    NOMBRE
+                    <input type="text" class="form-control" name="nombre" [(ngModel)]="personalM.nombre">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="modificarPersonal(personalM.numeroTrabajador, personalM)">GUARDAR CAMBIOS</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

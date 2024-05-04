@@ -1,0 +1,16 @@
+.navbar{
+height: 10vh;
+
+}
+img{
+height: 90%;
+}
+
+.contenido{
+min-height: 80vh;
+}
+
+fa-icon{
+    font: 2.5rem Verdana, sans-serif;
+    font-size-adjust: 0.58;
+}

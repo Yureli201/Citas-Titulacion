@@ -1,0 +1,80 @@
+#crear{
+  background-color: #727376;
+  color: white;
+  padding: 10px;
+  border-radius: 10px 10px 10px 10px;
+  transform: scale(0.8);
+  }
+  
+#crear2{
+  background-color: #D9D9D9;
+  margin: 0;
+  padding: 10px;
+  border-radius: 10px 10px 0% 0%;
+  }
+
+#navbar{
+    max-width: 5vh;
+}
+
+    .container-fluid {
+        min-height: 40vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    
+    .contenido{
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+      width: 100%;
+      background-color:#D9D9D9;
+      border-radius: 20px;
+      padding: 5vh;
+    }
+
+.calendario {
+  font-family: Arial, sans-serif;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.navegacion {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.meses-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.mes {
+  width: 100%;
+}
+
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.dias div {
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.dias div:hover {
+  background-color: #f0f0f0;
+}
+
+.dias .seleccionada {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.vacio {
+  visibility: hidden;
+}
+  

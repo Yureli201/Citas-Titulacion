@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administración</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Administración Titulación</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/administrarCitas">Administrar citas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/administrarUsuarios">Administrar usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/egresados/agregar">Agregar Egresados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/personal/agregar">Agregar Personal</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col">
+          <h2>Listado de Egresados</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Nivel de Titulación</th>
+                <th scope="col">Generación</th>
+                <th scope="col">Carrera de Titulación</th>
+                <th scope="col">CURP</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% egresados.forEach(egresado => { %>
+              <tr>
+                <td><%= egresado.matricula %></td>
+                <td><%= egresado.nombre %></td>
+                <td><%= egresado.nivelTitulacion %></td>
+                <td><%= egresado.generacion %></td>
+                <td><%= egresado.carreraTitulacion %></td>
+                <td><%= egresado.curp %></td>
+                <td><%= egresado.correo %></td>
+                <td><%= egresado.telefono %></td>
+                <td>
+                  <!-- Botones de editar y eliminar -->
+                  <form action="/citas/egresados/<%= egresado.matricula %>/editar" method="GET">
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                  </form>
+                  <form action="/citas/egresados/<%= egresado.matricula %>/eliminar" method="POST">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <h2>Listado de Personal</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Número de Trabajador</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% personal.forEach(persona => { %>
+              <tr>
+                <td><%= persona.numeroTrabajador %></td>
+                <td><%= persona.nombre %></td>
+                <td>
+                  <!-- Botones de editar y eliminar -->
+                  <form action="/citas/personal/<%= persona.numeroTrabajador %>/editar" method="GET">
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                  </form>
+                  <form action="/citas/personal/<%= persona.numeroTrabajador %>/eliminar" method="POST">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

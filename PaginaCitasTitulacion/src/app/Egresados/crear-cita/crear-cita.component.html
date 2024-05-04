@@ -1,0 +1,98 @@
+<div class="navbar mt-3 p-0 d-flex justify-content-end">
+    <h5 id="crear">CREAR CITA</h5>
+</div>
+
+<div class="container-fluid">
+    <div id="form-crear">
+        <h5 class="text-center mb-2 text-danger" *ngIf="mostrarBanner">Favor de escoger la fecha y hora de la cita</h5>
+        <h5 class="text-center mb-2 text-sucess" *ngIf="mostrarBannerDos">Cita creada con exito</h5>
+        <div class="row">
+            <form>
+                <div class="row row-cols-1 row-cols-md-2 mt-2">
+                    <div class="col">
+                        NOMBRE
+                        <input type="text" name="nombre" [(ngModel)]="Egresado.nombre" class="form-control" disabled>
+                    </div>
+                    <div class="col">
+                        MATRÍCULA
+                        <input type="text" name="matricula" [(ngModel)]="Egresado.matricula" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    NIVEL A TITULARSE
+                        <input type="text" class="form-control" name="nivelTitulacion" [(ngModel)]="Egresado.nivelTitulacion" disabled>
+                    </div>
+                    <div class="col">
+                    CARRERA A TITULARSE
+                    <input type="text" class="form-control" name="carreraTitulacion" [(ngModel)]="Egresado.carreraTitulacion" disabled>
+                </div>
+                    <div class="col">
+                    GENERACIÓN
+                        <input type="text" class="form-control" name="generacion" [(ngModel)]="Egresado.generacion" disabled>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 mt-2">
+                    <div class="col">
+                    CORREO ELECTRÓNICO
+                        <input type="email" class="form-control" name="email" [(ngModel)]="Egresado.correo" disabled>
+                    </div>
+                    <div class="col">
+                    NÚMERO DE TELÉFONO
+                        <input type="text" class="form-control" name="telefono" [(ngModel)]="Egresado.telefono" disabled>
+                    </div>
+                    <div class="col">
+                    CURP
+                        <input type="text" class="form-control" name="curp" [(ngModel)]="Egresado.curp" disabled>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 mt-2">
+                    <div class="col">
+                    FECHA
+                    <app-calendario (fechaSeleccionadaEvent)="manejarFechaSeleccionada($event)"></app-calendario>
+                </div>
+                    <div class="col">
+                    HORA
+                    <select class="form-select" name="hora" [(ngModel)]="Cita.hora" required>
+                        <option *ngFor="let horario of horariosDisponibles" [value]="horario">
+                                {{ horario }}
+                        </option>
+                    </select>
+                    
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4 mb-3 d-flex justify-content-center">
+                    <button type="button" class="btn btn-success" 
+                            [disabled]="!fechaSeleccionada || !Cita.hora" 
+                            data-bs-toggle="modal" data-bs-target="#crearModal">CONFIRMAR CITA</button>
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="crearModal" tabindex="-1" aria-labelledby="crearModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">CREAR CITA</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de confirmar la cita?
+                    <br>
+                    Una vez confirmada no podras borrar, modificar ni crear una nueva cita hasta que la fecha indicada expire
+                </p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center ">
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"  (click)="confirmarCita()">CREAR CITA</button>
+            </div>
+        </div>
+    </div>
+</div>

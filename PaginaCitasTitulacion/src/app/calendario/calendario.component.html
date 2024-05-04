@@ -1,0 +1,14 @@
+<div class="calendario">
+    <div class="header">
+      <button (click)="cambiarMes(-1)">&lt;</button>
+      <span>{{ meses[fechaConsulta.getMonth()] }} {{ fechaConsulta.getFullYear() }}</span>
+      <button (click)="cambiarMes(1)">&gt;</button>
+    </div>
+    <div class="dias-semana">
+      <div *ngFor="let dia of diasSemana" class="dia-semana">{{ dia }}</div>
+    </div>
+    <div class="dias-mes">
+      <div *ngFor="let dia of diasMes" class="dia" [ngClass]="{'deshabilitado': dia.estado === 'deshabilitado', 'seleccionado': dia.estado === 'seleccionado'}" (click)="seleccionarFecha(dia)">{{ dia.dia }}</div>
+    </div>
+  </div>
+  

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administración</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Administración Titulación</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/administrarCitas">Administrar citas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/administrarUsuarios">Administrar usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/egresados/agregar">Agregar Egresados</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/citas/personal/agregar">Agregar Personal</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1>Agregar Nuevo Egresado</h1>
+    <form action="/citas/egresados/agregar" method="POST">
+      <label for="nombre">Nombre:</label><br />
+      <input type="text" id="nombre" name="nombre" required /><br />
+      <label for="nivelTitulacion">Nivel de Titulación:</label><br />
+      <input type="text" id="nivelTitulacion" name="nivelTitulacion" required /><br />
+      <label for="generacion">Generación:</label><br />
+      <input type="text" id="generacion" name="generacion" required /><br />
+      <label for="carreraTitulacion">Carrera de Titulación:</label><br />
+      <input type="text" id="carreraTitulacion" name="carreraTitulacion" required /><br />
+      <label for="curp">CURP:</label><br />
+      <input type="text" id="curp" name="curp" required /><br />
+      <label for="correo">Correo Electrónico:</label><br />
+      <input type="email" id="correo" name="correo" required /><br />
+      <label for="telefono">Teléfono:</label><br />
+      <input type="tel" id="telefono" name="telefono" /><br /><br />
+      <button type="submit">Agregar Egresado</button>
+    </form>
+  </body>
+</html>

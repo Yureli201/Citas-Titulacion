@@ -1,0 +1,36 @@
+#crear{
+    background-color: #D9D9D9;
+    margin: 0 10%;
+    padding: 10px;
+    border-radius: 10px 10px 0% 0%;
+    }
+    
+    #navbar{
+        max-width: 5vh;
+    }
+    
+    .container-fluid {
+        min-height: 40vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+    #form-crear{
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+      margin-bottom: 5vh;
+      width: 100%;
+      background-color:#D9D9D9;
+      border-radius: 20px;
+      padding: 5vh;
+    }
+    
+    .row{
+      background-color: white;
+      width: 100%;
+      height: auto;
+    }
+    form{
+    width: 100%;
+    padding: 15PX;
+    }

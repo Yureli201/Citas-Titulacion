@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear Cita</title>
+  </head>
+  <body>
+    <h1>Crear Cita</h1>
+    <h2>Datos del Egresado</h2>
+    <p>Nombre: <span id="nombre"><%= egresado.nombre %></span></p>
+    <p>Matrícula: <span id="matricula" name="matricula"><%= egresado.matricula %></span></p>
+    <p>Nivel a titularse: <span id="nivelTitulacion"><%= egresado.nivelTitulacion %></span></p>
+    <p>Generación: <span id="generacion"><%= egresado.generacion %></span></p>
+    <p>Carrera a titularse: <span id="carreraTitulacion"><%= egresado.carreraTitulacion %></span></p>
+    <p>CURP: <span id="curp"><%= egresado.curp %></span></p>
+
+    <form action="/citas/consultar" method="POST">
+      <input type="hidden" id="matricula" name="matricula" value="<%= egresado.matricula %>" />
+
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" required />
+
+      <label for="hora">Hora:</label>
+      <input type="time" id="hora" name="hora" required />
+
+      <button type="submit">Agendar Cita</button>
+    </form>
+  </body>
+</html>

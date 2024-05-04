@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultar Cita</title>
+  </head>
+  <body>
+    <h1>Consultar Cita</h1>
+    <div>
+      <h2>Detalles de la Cita</h2>
+      <p>Matrícula del Egresado: <%= cita.egresadoMatricula %></p>
+      <p>Fecha: <%= cita.fecha %></p>
+      <p>Hora: <%= cita.hora %></p>
+    </div>
+    <div>
+      <h2>Acciones</h2>
+      <form action="/citas/editar/<%= cita.id %>" method="GET">
+        <button type="submit">Modificar Cita</button>
+      </form>
+      <form action="/citas/eliminar" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta cita?');">
+        <input type="hidden" name="citaId" value="<%= cita.id %>" />
+        <button type="submit">Eliminar Cita</button>
+      </form>
+    </div>
+  </body>
+</html>
